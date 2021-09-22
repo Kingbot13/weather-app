@@ -5,18 +5,9 @@
 // write functions to return weather data
 
 /* 
-    function() {
 
-       try {
-           await fetch(api)
-           await data.json()
+formula to convert kelvin to faren: (K − 273.15) × 9/5 + 32 = °F
 
-       } 
-
-       catch {
-           error handling
-       }
-    }
 */
 
 const main = (() => {
@@ -26,6 +17,10 @@ const main = (() => {
     
 
     // logic
+    function convert(k) {
+        return (k - 273.15) * 9 / 5 + 32;
+    };
+
     const button = document.querySelector('button');
     button.addEventListener('click', () => {
         if ( container.hasChildNodes() ) {
