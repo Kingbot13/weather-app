@@ -22,11 +22,17 @@
 const main = (() => {
 
     // DOM
-    const container = document.createElement('div');
+    const container = document.getElementById('container');
     
+
     // logic
     const button = document.querySelector('button');
     button.addEventListener('click', () => {
+        if ( container.hasChildNodes() ) {
+            for ( let i = container.childNodes.length - 1; i >= 0; i-- ) {
+                container.removeChild(container.childNodes[i]);
+            };
+        };
         const location = document.querySelector('input').value;
         async function getWeather (location) {
             try {
@@ -34,6 +40,12 @@ const main = (() => {
                 {mode: 'cors'});
                 let data = await request.json();
                 console.log(data);
+                for ( obj in data.main ) {
+                    let info = document.createElement('p');
+                    info.textContent = `${obj}: ${data.main[obj]}`;
+                    container.appendChild(info);
+
+                }
             } catch (err) {
                 console.error('Error', err)
             };
