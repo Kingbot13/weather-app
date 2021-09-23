@@ -37,8 +37,17 @@ const main = (() => {
                 console.log(data);
                 for ( obj in data.main ) {
                     let info = document.createElement('p');
-                    info.textContent = `${obj}: ${data.main[obj]}`;
-                    container.appendChild(info);
+                    console.log(obj);
+                    if ( obj !== 'pressure' && obj !== 'humidity' ) {
+                        info.textContent = `${obj}: ${convert(data.main[obj])}F`;
+                        container.appendChild(info);
+                    } else if ( obj === 'humidity' ) {
+                        info.textContent = `${obj}: ${data.main[obj]}%`;
+                        container.appendChild(info); 
+                    } else {
+                        info.textContent = `${obj}: ${data.main[obj]}`;
+                        container.appendChild(info);   
+                    };
 
                 }
             } catch (err) {
